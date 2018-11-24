@@ -1,64 +1,79 @@
 <!DOCTYPE html> 
 <html> 
 <head> 
-  <script type="text/javascript"> 
-function watchLocation(successCallback, errorCallback) {
-  successCallback = successCallback || function(){};
-  errorCallback = errorCallback || function(){};
 
-  // Try HTML5-spec geolocation.
-  var geolocation = navigator.geolocation;
-
-  if (geolocation) {
-    // We have a real geolocation service.
-    try {
-      function handleSuccess(position) {
-        successCallback(position.coords);
-      }
-
-      geolocation.watchPosition(handleSuccess, errorCallback, {
-        enableHighAccuracy: true,
-        maximumAge: 5000 // 5 sec.
-      });
-    } catch (err) {
-      errorCallback();
-    // document.getElementById('err').innerHTML = 'dupa1';
-    }
-  } else {
-    errorCallback();
-    // document.getElementById('err').innerHTML = 'dupa2';
-
-  }
-}
-
-function init() {
-  watchLocation(function(coords) {
-    document.getElementById('test').innerHTML = 'coords latitude: ' + coords.latitude + ', coords longitute' + coords.longitude + ', coords wysokosc' + coords.altitude + ', coords accuracy' + coords.accuracy;
-  }, function() {
-    document.getElementById('test').innerHTML = 'error';
-  });
-}
-  </script> 
-  <script src="converter.js"></script>
 </head> 
 
-<body onload="init()"> 
+<body> 
   <div id="test">Loading...</div> 
   <div id="err"></div>
+
+
+
+<script src="js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript"> 
+  var newlatitude;
+  var newlongtitude;
+
+  function watchLocation(successCallback, errorCallback) {
+    // console.log(coords.latitude);
+    successCallback = successCallback || function(){};
+    errorCallback = errorCallback || function(){};
+  
+    // Try HTML5-spec geolocation.
+    var geolocation = navigator.geolocation;
+  
+    if (geolocation) {
+      // We have a real geolocation service.
+      try {
+        function handleSuccess(position) {
+          successCallback(position.coords);
+        }
+  
+        geolocation.watchPosition(handleSuccess, errorCallback, {
+          enableHighAccuracy: true,
+          maximumAge: 5000 // 5 sec.
+        });
+      } catch (err) {
+        errorCallback();
+      // document.getElementById('err').innerHTML = 'dupa1';
+      }
+    } else {
+      errorCallback();
+      // document.getElementById('err').innerHTML = 'dupa2';
+  
+    }
+    
+  }
+  
+
+  
+ $(document).ready(function(){
+      watchLocation(function(coords) {
+
+        document.getElementById('test').innerHTML = 'coords latitude: ' + coords.latitude + ', coords longitute' + coords.longitude + ', coords wysokosc' + coords.altitude + ', coords accuracy' + coords.accuracy;
+        
+
+        // CONTENT OF MAIN FUCTION
+        newlatitude = coords.latitude;
+        newlongtitude = coords.longitude;
+        console.log(fromLatLon(newlatitude, newlongtitude));
+
+        var neweasting = fromLatLon.easting;
+        var newnorthing = Number(fromLatLon.northing);
+        
+        console.log(neweasting);
+        console.log(toLatLon(neweasting, newnorthing , 34, "U"));
+
+      }, function() {
+        document.getElementById('test').innerHTML = 'error';
+      });
+    });
+
+  </script> 
+  <script src="converter.js"></script>
+
+<script></script>
+
 </body> 
-
-<script>
-
-
-
-
-
-
-console.log(fromLatLon(50.088728, 19.984308));
-
-
-console.log(toLatLon(427343.0484526858, 5548989.961375354, 34, 'U'));
-
-
-</script>
 </html>
