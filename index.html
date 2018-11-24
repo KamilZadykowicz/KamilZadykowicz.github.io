@@ -1,0 +1,48 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <script type="text/javascript"> 
+function watchLocation(successCallback, errorCallback) {
+  successCallback = successCallback || function(){};
+  errorCallback = errorCallback || function(){};
+
+  // Try HTML5-spec geolocation.
+  var geolocation = navigator.geolocation;
+
+  if (geolocation) {
+    // We have a real geolocation service.
+    try {
+      function handleSuccess(position) {
+        successCallback(position.coords);
+      }
+
+      geolocation.watchPosition(handleSuccess, errorCallback, {
+        enableHighAccuracy: true,
+        maximumAge: 5000 // 5 sec.
+      });
+    } catch (err) {
+    //   errorCallback();
+    document.getElementById('err').innerHTML = 'dupa1';
+    }
+  } else {
+    // errorCallback();
+    document.getElementById('err').innerHTML = 'dupa2';
+
+  }
+}
+
+function init() {
+  watchLocation(function(coords) {
+    document.getElementById('test').innerHTML = 'coords latitude: ' + coords.latitude + ', coords longitute' + coords.longitude + ', coords wysokosc' + coords.altitude;
+  }, function() {
+    document.getElementById('test').innerHTML = 'error';
+  });
+}
+  </script> 
+</head> 
+
+<body onload="init()"> 
+  <div id="test">Loading...</div> 
+  <div id="err"></div>
+</body> 
+</html>
