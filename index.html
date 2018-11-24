@@ -21,19 +21,19 @@ function watchLocation(successCallback, errorCallback) {
         maximumAge: 5000 // 5 sec.
       });
     } catch (err) {
-    //   errorCallback();
-    document.getElementById('err').innerHTML = 'dupa1';
+      errorCallback();
+    // document.getElementById('err').innerHTML = 'dupa1';
     }
   } else {
-    // errorCallback();
-    document.getElementById('err').innerHTML = 'dupa2';
+    errorCallback();
+    // document.getElementById('err').innerHTML = 'dupa2';
 
   }
 }
 
 function init() {
   watchLocation(function(coords) {
-    document.getElementById('test').innerHTML = 'coords latitude: ' + coords.latitude + ', coords longitute' + coords.longitude + ', coords wysokosc' + coords.altitude;
+    document.getElementById('test').innerHTML = 'coords latitude: ' + coords.latitude + ', coords longitute' + coords.longitude + ', coords wysokosc' + coords.altitude + ', coords accuracy' + coords.accuracy;
   }, function() {
     document.getElementById('test').innerHTML = 'error';
   });
