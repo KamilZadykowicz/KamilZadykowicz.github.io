@@ -8,12 +8,22 @@
   <div id="test">Loading...</div>
   <div id="err"></div>
 
+  <button id="playGame">
+    ZAGRAJ
+  </button>
+
 
 
 <script src="js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
-  var newlatitude;
-  var newlongtitude;
+  var currentLatitude;
+  var currentLongtitude;
+  var numberToRound = 1000000;
+  var utm;
+  var newEasting;
+  var newNorthing;
+  var counter1 = 1;
+  var coArray = [];
 
   function watchLocation(successCallback, errorCallback) {
     // console.log(coords.latitude);
@@ -46,27 +56,84 @@
 
   }
 
+  function generateRandomPoint() {
+    newEasting = utm.easting + Math.floor((Math.random() * 1001) - 499);
+    newNorthing = utm.northing + Math.floor((Math.random() * 1001) - 499);
+    
+    console.log(utm.easting);
+    console.log(newEasting);
+    console.log(utm.easting - newEasting);
+
+    console.log("north");
+
+    console.log(utm.northing);
+    console.log(newNorthing);
+    console.log(utm.northing - newNorthing);
+
+
+    console.log(newEasting);
+    console.log(toLatLon(newEasting, newNorthing , 34, "U"));
+    function isInCircle(a, b, x, y, r) {
+        var dist_points = (a - x) * (a - x) + (b - y) * (b - y);
+        r = r * r;
+        if (dist_points <= r) {
+            // return true;
+            coArray.push([x,y]);
+            console.log('Spełnione', coArray);
+        }
+        else {
+          // newEasting = utm.easting + Math.floor((Math.random() * 1001) - 499);
+          // newNorthing = utm.northing + Math.floor((Math.random() * 1001) - 499);
+          console.log('NIespełnione', coArray);
+          generateRandomPoint();
+        }
+        // console.log(isInCircle(utm.easting, utm.northing, newEasting, newNorthing, 500));
+    }
+  }
 
 
  $(document).ready(function(){
       watchLocation(function(coords) {
 
-        document.getElementById('test').innerHTML = 'coords latitude: ' + coords.latitude + ', coords longitute' + coords.longitude + ', coords wysokosc' + coords.altitude + ', coords accuracy' + coords.accuracy;
+        document.getElementById('test').innerHTML = 'coords latitude: ' + coords.latitude + ', coords longitute' + coords.longitude;
 
 
         // CONTENT OF MAIN FUCTION
-        newlatitude = coords.latitude;
-        newlongtitude = coords.longitude;
-        var utm = fromLatLon(newlatitude, newlongtitude)
-        var newEasting = utm.easting;
-        var newNorthing = utm.northing;
+        // new latitude is current location of user
+        currentLatitude = Math.round(coords.latitude*numberToRound)/numberToRound;
+        console.log(currentLatitude);
+        currentLongtitude = Math.round(coords.longitude*numberToRound)/numberToRound;
+        utm = fromLatLon(currentLatitude, currentLongtitude)
+        // newEasting = utm.easting;
+        // newNorthing = utm.northing;
 
-        console.log(newEasting);
-        console.log(toLatLon(newEasting, newNorthing , 34, "U"));
+        
+
+
+
+        // function to check is the generated new point is6+ in circle
+
+
+
+       
+        //
+
+
+
 
       }, function() {
         document.getElementById('test').innerHTML = 'error';
       });
+
+
+      $("#playGame").click(function(){
+        // generate new radnom point (OUR DESTINATION)
+        generateRandomPoint();
+
+
+      });
+
+      //end of document ready
     });
 
   </script>
