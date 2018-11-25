@@ -73,23 +73,28 @@
 
     console.log(newEasting);
     console.log(toLatLon(newEasting, newNorthing , 34, "U"));
-    function isInCircle(a, b, x, y, r) {
-        var dist_points = (a - x) * (a - x) + (b - y) * (b - y);
-        r = r * r;
-        if (dist_points <= r) {
-            // return true;
-            coArray.push([x,y]);
-            console.log('Spełnione', coArray);
-        }
-        else {
-          // newEasting = utm.easting + Math.floor((Math.random() * 1001) - 499);
-          // newNorthing = utm.northing + Math.floor((Math.random() * 1001) - 499);
-          console.log('NIespełnione', coArray);
-          generateRandomPoint();
-        }
-        // console.log(isInCircle(utm.easting, utm.northing, newEasting, newNorthing, 500));
-    }
+    isInCircle(utm.easting, utm.northing, newEasting, newNorthing, 500)
   }
+
+  function isInCircle(a, b, x, y, r) {
+    var dist_points = (a - x) * (a - x) + (b - y) * (b - y);
+    r = r * r;
+    if (dist_points <= r) {
+        // return true;
+        coArray.push([x,y]);
+        console.log('Spełnione', coArray);
+    }
+    else {
+      // newEasting = utm.easting + Math.floor((Math.random() * 1001) - 499);
+      // newNorthing = utm.northing + Math.floor((Math.random() * 1001) - 499);
+      console.log('NIespełnione', coArray);
+      generateRandomPoint();
+    }
+    // console.log(isInCircle(utm.easting, utm.northing, newEasting, newNorthing, 500));
+  }
+
+var  dLengthBefore=((a1-b1)(a1-b1))+((c1-d1)(c1-d1));
+var  dLength=Math.sqrt(dLengthBefore);
 
 
  $(document).ready(function(){
