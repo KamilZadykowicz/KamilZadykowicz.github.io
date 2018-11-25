@@ -26,6 +26,10 @@
   var newNorthing;
   var counter1 = 1;
   var coArray = [];
+  var howManyGames = 1;
+  var  dLengthBefore;
+  var  dLength;
+  
 
   function watchLocation(successCallback, errorCallback) {
     // console.log(coords.latitude);
@@ -62,19 +66,19 @@
     newEasting = utm.easting + Math.floor((Math.random() * 1001) - 499);
     newNorthing = utm.northing + Math.floor((Math.random() * 1001) - 499);
     
-    console.log(utm.easting);
-    console.log(newEasting);
-    console.log(utm.easting - newEasting);
+    // console.log(utm.easting);
+    // console.log(newEasting);
+    // console.log(utm.easting - newEasting);
 
-    console.log("north");
+    // console.log("north");
 
-    console.log(utm.northing);
-    console.log(newNorthing);
-    console.log(utm.northing - newNorthing);
+    // console.log(utm.northing);
+    // console.log(newNorthing);
+    // console.log(utm.northing - newNorthing);
 
 
-    console.log(newEasting);
-    console.log(toLatLon(newEasting, newNorthing , 34, "U"));
+    // console.log(newEasting);
+    // console.log(toLatLon(newEasting, newNorthing , 34, "U"));
     isInCircle(utm.easting, utm.northing, newEasting, newNorthing, 500)
   }
 
@@ -85,6 +89,7 @@
         // return true;
         coArray.push([x,y]);
         console.log('Spełnione', coArray);
+        howManyGames++;
     }
     else {
       // newEasting = utm.easting + Math.floor((Math.random() * 1001) - 499);
@@ -96,8 +101,8 @@
   }
 
   function howFarToWin(a1,b1,c1,d1) {
-    var  dLengthBefore = ((a1-b1)*(a1-b1))+((c1-d1)*(c1-d1));
-    var  dLength=Math.sqrt(dLengthBefore);
+  dLengthBefore = ((a1-b1)*(a1-b1))+((c1-d1)*(c1-d1));
+  dLength=Math.sqrt(dLengthBefore);
     console.log(dLength);
   }
 
@@ -115,7 +120,7 @@
         // CONTENT OF MAIN FUCTION
         // new latitude is current location of user
         currentLatitude = Math.round(coords.latitude*numberToRound)/numberToRound;
-        console.log(currentLatitude);
+        // console.log(currentLatitude);
         currentLongtitude = Math.round(coords.longitude*numberToRound)/numberToRound;
         utm = fromLatLon(currentLatitude, currentLongtitude)
         // newEasting = utm.easting;
@@ -128,10 +133,23 @@
 
       $("#playGame").click(function(){
         // generate new radnom point (OUR DESTINATION)
-        generateRandomPoint();
-        howFarToWin(currentLatitude, currentLongtitude, newEasting, newNorthing);
-        console.log(currentLatitude, currentLongtitude, newEasting, newNorthing);
-        document.getElementById('result').innerHTML = currentLatitude+' -- ' +currentLongtitude+' -- ' + newEasting+' -- ' + newNorthing;
+        if (howManyGames === 1) {
+          generateRandomPoint();
+          howFarToWin(utm.easting, newEasting, utm.northing, newNorthing);
+          document.getElementById('result').innerHTML = dLength + "metrów do celu";
+        }
+        else if(howManyGames<6) {
+          howFarToWin(utm.easting, newEasting, utm.northing, newNorthing);
+          // console.log(utm.easting, newEasting, utm.northing, newNorthing);
+          document.getElementById('result').innerHTML = dLength + "metrów do celu";
+          howManyGames++;
+        }
+        else {
+          generateRandomPoint();
+          howManyGames = 2;
+          howFarToWin(utm.easting, newEasting, utm.northing, newNorthing);
+          document.getElementById('result').innerHTML = dLength + "metrów do celu";
+        }
       });
 
       //end of document ready
