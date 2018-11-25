@@ -12,6 +12,8 @@
     ZAGRAJ
   </button>
 
+  <div id="result"></div>
+
 
 
 <script src="js/jquery-3.3.1.min.js"></script>
@@ -93,14 +95,21 @@
     // console.log(isInCircle(utm.easting, utm.northing, newEasting, newNorthing, 500));
   }
 
-var  dLengthBefore=((a1-b1)(a1-b1))+((c1-d1)(c1-d1));
-var  dLength=Math.sqrt(dLengthBefore);
+  function howFarToWin(a1,b1,c1,d1) {
+    var  dLengthBefore = ((a1-b1)*(a1-b1))+((c1-d1)*(c1-d1));
+    var  dLength=Math.sqrt(dLengthBefore);
+    console.log(dLength);
+  }
+
+// var  dLengthBefore=((a1-b1)(a1-b1))+((c1-d1)(c1-d1));
+// var  dLength=Math.sqrt(dLengthBefore);
 
 
  $(document).ready(function(){
       watchLocation(function(coords) {
 
         document.getElementById('test').innerHTML = 'coords latitude: ' + coords.latitude + ', coords longitute' + coords.longitude;
+
 
 
         // CONTENT OF MAIN FUCTION
@@ -112,20 +121,6 @@ var  dLength=Math.sqrt(dLengthBefore);
         // newEasting = utm.easting;
         // newNorthing = utm.northing;
 
-        
-
-
-
-        // function to check is the generated new point is6+ in circle
-
-
-
-       
-        //
-
-
-
-
       }, function() {
         document.getElementById('test').innerHTML = 'error';
       });
@@ -134,8 +129,9 @@ var  dLength=Math.sqrt(dLengthBefore);
       $("#playGame").click(function(){
         // generate new radnom point (OUR DESTINATION)
         generateRandomPoint();
-
-
+        howFarToWin(currentLatitude, currentLongtitude, newEasting, newNorthing);
+        console.log(currentLatitude, currentLongtitude, newEasting, newNorthing);
+        document.getElementById('result').innerHTML = currentLatitude+' -- ' +currentLongtitude+' -- ' + newEasting+' -- ' + newNorthing;
       });
 
       //end of document ready
