@@ -1,3 +1,5 @@
+// BATERIA
+
 if ('getBattery' in navigator || ('battery' in navigator && 'Promise' in window)) {
     var target = document.getElementById('target');
   
@@ -60,3 +62,23 @@ if ('getBattery' in navigator || ('battery' in navigator && 'Promise' in window)
       battery.addEventListener('levelchange', onLevelChange);
     });
   }
+
+//   END BATTERY
+
+// VIBRATION
+
+$('#btn-vibrate1').click(function(){
+    navigator.vibrate(100);
+});
+$('#btn-vibrate2').click(function(){
+    navigator.vibrate(200);
+});
+$('#btn-vibrate3').click(function(){
+    navigator.vibrate(300);
+});
+$('#btn-vibrate4').click(function(){
+    navigator.vibrate(400);
+});
+$('#btn-vibrate5').click(function(){
+    navigator.vibrate(500);
+});
