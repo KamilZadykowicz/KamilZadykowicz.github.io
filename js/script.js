@@ -46,6 +46,12 @@ if ('getBattery' in navigator || ('battery' in navigator && 'Promise' in window)
     //   document.getElementById('charging').innerHTML = battery.charging ? 'charging' : 'discharging';
     //   document.getElementById('chargingTime').innerHTML = battery.chargingTime + ' s';
     //   document.getElementById('dischargingTime').innerHTML = battery.dischargingTime + ' s';
+    if(battery.charging == true) {
+        document.getElementById('battery-charging').style.display = "block";
+    }
+    else {
+        document.getElementById('battery-charging').style.display = "none";
+    }
       document.getElementById('level').innerHTML = Math.round(battery.level * 100) + "%";
       document.getElementById('battery-lev').style.height = battery.level*100 + "%";
       battery.addEventListener('chargingchange', onChargingChange);
