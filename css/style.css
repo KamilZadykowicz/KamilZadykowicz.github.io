@@ -80,3 +80,18 @@ body {
 #memory {
     font-weight: 700;
 }
+
+.install-app {
+    display: none;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    background-color: #351764;
+    color: #FFFFFF;
+}
+
+@media all and (display-mode: standalone) {
+    body {
+      background-color: yellow;
+    }
+  }
