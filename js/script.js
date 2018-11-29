@@ -203,3 +203,7 @@ btnAdd.addEventListener('click', (e) => {
         deferredPrompt = null;
       });
   });
+
+  window.addEventListener('appinstalled', (evt) => {
+    app.logEvent('a2hs', 'installed');
+  });
