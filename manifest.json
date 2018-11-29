@@ -1,0 +1,18 @@
+{
+    "short_name": "Kamil App",
+    "name": "Kamil Application",
+    "icons": [
+      {
+        "src": "img/2.png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "img/1.png",
+        "sizes": "512x512"
+      }
+    ],
+    "theme_color": "#ff0000",
+    "background_color": "#ff0000",
+    "start_url": "index.html",
+    "display": "standalone"
+  }

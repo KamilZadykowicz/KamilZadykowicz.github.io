@@ -63,3 +63,20 @@ body {
     padding: 10px 10px;
     margin: 2px;
 }
+
+.btn-stream {
+    margin-top: 20px;
+    background-color: #ff2244;
+    color: #FFFFFF;
+    outline: none;
+    padding: 2px 10px;
+}
+
+.memory__p {
+    font-size: 12px;
+    margin-top: 20px;
+}
+
+#memory {
+    font-weight: 700;
+}

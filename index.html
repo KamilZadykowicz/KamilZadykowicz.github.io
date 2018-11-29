@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-grid.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
+    <link rel="manifest" href="/manifest.json">
 
 </head>
 <body>
@@ -41,6 +42,19 @@
             <button id="btn-vibrate5" class="btn-vibrate">
                 Wibracje 5
             </button> 
+
+            <p class="memory__p">
+                Pojemność RAM Twojego urządzenia to: <span id="memory">unkown</span> GB.
+            </p>
+
+            <p><button class="btn-stream" onclick="getStream()">START STREAM</button></p>
+
+            <p>Local video</p>
+            <video autoplay id="localVideo" style="height:180px; width: 240px;" poster="https://image.freepik.com/free-icon/video-camera-symbol_318-40225.png"></video>
+
+            <p>Remote video</p>
+            <video autoplay id="remoteVideo" style="height:180px; width: 240px;"></video>
+
 
         </div>
 
