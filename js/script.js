@@ -9,16 +9,26 @@ if ('getBattery' in navigator || ('battery' in navigator && 'Promise' in window)
     }
     
     function onChargingChange() {
-      handleChange('Battery charging changed to <b>' + (this.charging ? 'charging' : 'discharging') + '</b>')
+    //   handleChange('Battery charging changed to <b>' + (this.charging ? 'charging' : 'discharging') + '</b>')
+        if(this.charging == "charging") {
+            document.getElementById('battery-charging').style.display = "block";
+        }
+        else {
+            document.getElementById('battery-charging').style.display = "none";
+        }
     }
     function onChargingTimeChange() {
-      handleChange('Battery charging time changed to <b>' + this.chargingTime + ' s</b>');
+    //   handleChange('Battery charging time changed to <b>' + this.chargingTime + ' s</b>');
+        
     }
     function onDischargingTimeChange() {
-      handleChange('Battery discharging time changed to <b>' + this.dischargingTime + ' s</b>');
+    //   handleChange('Battery discharging time changed to <b>' + this.dischargingTime + ' s</b>')
+        
     }
     function onLevelChange() {
-      handleChange('Battery level changed to <b>' + this.level + '</b>');
+    //   handleChange('Battery level changed to <b>' + this.level + '</b>');
+      document.getElementById('level').innerHTML = Math.round(this.level * 100) + "%";
+      document.getElementById('battery-lev').style.height = this.level*100 + "%";
     }
   
     var batteryPromise;
@@ -38,6 +48,6 @@ if ('getBattery' in navigator || ('battery' in navigator && 'Promise' in window)
     //   battery.addEventListener('chargingchange', onChargingChange);
     //   battery.addEventListener('chargingtimechange', onChargingTimeChange);
     //   battery.addEventListener('dischargingtimechange', onDischargingTimeChange);
-    //   battery.addEventListener('levelchange', onLevelChange);
+      battery.addEventListener('levelchange', onLevelChange);
     });
   }
