@@ -33,7 +33,7 @@ if ('getBattery' in navigator || ('battery' in navigator && 'Promise' in window)
     //   document.getElementById('charging').innerHTML = battery.charging ? 'charging' : 'discharging';
     //   document.getElementById('chargingTime').innerHTML = battery.chargingTime + ' s';
     //   document.getElementById('dischargingTime').innerHTML = battery.dischargingTime + ' s';
-      document.getElementById('level').innerHTML = battery.level * 100 + "%";
+      document.getElementById('level').innerHTML = Math.round(battery.level * 100) + "%";
       document.getElementById('battery-lev').style.height = battery.level*100 + "%";
     //   battery.addEventListener('chargingchange', onChargingChange);
     //   battery.addEventListener('chargingtimechange', onChargingTimeChange);
