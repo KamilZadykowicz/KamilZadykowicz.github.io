@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.battery {
+    width: 40px;
+    height: 100px;
+    margin-left: auto;
+    position: relative;
+    background-color: rgb(112, 82, 82);
+    margin-top: 50px;
+}
+
+.battery-point {
+    width: 15px;
+    height: 5px;
+    background-color: rgb(112, 82, 82);
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.battery__level {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #008000;
+    height: 50px;
+}
+
+.battery-text {
+    margin-top: 5px;
+    font-weight: 700;
+    font-size: 12px;
+    color: #020202;
+    text-align: right;
+}
